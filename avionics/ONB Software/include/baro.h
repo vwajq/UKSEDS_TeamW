@@ -29,7 +29,7 @@ void bmp_setup()
 }
 
 
-float * bmp_data()
+float * bmp_get_data()
 {
     bmp_setup();
 
