@@ -1,5 +1,7 @@
 #include <Arduino.h>
 #include "baro.h"
+#include "imu.h"
+
 #include <SPI.h>
 #include "SdFat.h"
 #include "Adafruit_SPIFlash.h"
@@ -27,6 +29,8 @@ void setup() {
 }
 
 void loop() {
+  // Add a delay???
+
   iterations++;
 
   my_file = fatfs.open("baro_data.txt", FILE_WRITE);

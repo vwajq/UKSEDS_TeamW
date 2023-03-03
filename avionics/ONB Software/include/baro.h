@@ -17,7 +17,7 @@ Adafruit_BMP3XX bmp;
 
 void bmp_setup()
 {
-    if (!bmp.begin_SPI(BMP_CS, BMP_SCK, BMP_MISO, BMP_MOSI))
+    if (!bmp.begin_SPI(BMP_CS))
     {
         throw "Could not detect BMP390";
     }
