@@ -29,7 +29,7 @@ void bmp_setup()
 }
 
 
-float * bmp_get_data()
+void bmp_get_data(float *data)
 {
     bmp_setup();
 
@@ -38,13 +38,9 @@ float * bmp_get_data()
         throw "BMP390 failed to perform reading";
     }
 
-    float data[3];
-
     data[0] = bmp.temperature;
     data[1] = bmp.pressure;
     data[2] = bmp.readAltitude(SEALEVELPRESSURE_HPA);
-
-    return data;
 }
 
 #endif 

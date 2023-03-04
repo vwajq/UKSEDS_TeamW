@@ -24,11 +24,9 @@ void imu_setup()
     lsm.setGyroDataRate(LSM6DS_RATE_12_5_HZ);
 }
 
-float * imu_get_data()
+void imu_get_data(float *data)
 {
     imu_setup();
-
-    float data[7];
 
     sensors_event_t accel;
     sensors_event_t gyro;
@@ -42,8 +40,6 @@ float * imu_get_data()
     data[4] = gyro.gyro.x;
     data[5] = gyro.gyro.y;
     data[6] = gyro.gyro.z;
-
-    return data;
 }
 
 #endif

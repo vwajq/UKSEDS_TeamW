@@ -34,7 +34,8 @@ void loop() {
   iterations++;
 
   my_file = fatfs.open("baro_data.txt", FILE_WRITE);
-  float *bmp_data = bmp_get_data();
+  float bmp_data[3];
+  bmp_get_data(bmp_data);
 
   // if the file opened okay, write to it:
   if (my_file) {
