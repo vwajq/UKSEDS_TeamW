@@ -1,5 +1,8 @@
 #include "gps.h"
 
+NMEAGPS  gps; // This parses the GPS characters
+gps_fix  fix; // This holds on to the latest values
+
 float * gps_get_data()
 {
     float data[3];

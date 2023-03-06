@@ -1,5 +1,7 @@
 #include "baro.h"
 
+Adafruit_BMP3XX bmp;
+
 void bmp_setup()
 {
     if (!bmp.begin_SPI(BMP_CS))

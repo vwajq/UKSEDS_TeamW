@@ -1,5 +1,7 @@
 #include "imu.h"
 
+Adafruit_LSM6DSOX lsm; 
+
 void imu_setup()
 {
     if (!lsm.begin_SPI(LSM_CS))
