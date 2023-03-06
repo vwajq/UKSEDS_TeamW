@@ -4,9 +4,17 @@
 #include <NMEAGPS.h>
 #include <GPSport.h>
 
+struct gpsDataStruct {
+    double longitude;
+    double latitude;
+    double altitude;
+};
+
+extern gpsDataStruct gpsData;
+
 extern NMEAGPS  gps; // This parses the GPS characters
 extern gps_fix  fix; // This holds on to the latest values
 
-float * gps_get_data();
+void gpsGetData();
 
 #endif

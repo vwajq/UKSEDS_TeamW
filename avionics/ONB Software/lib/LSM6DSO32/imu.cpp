@@ -2,7 +2,7 @@
 
 Adafruit_LSM6DSOX lsm; 
 
-void imu_setup()
+void imuSetup()
 {
     if (!lsm.begin_SPI(LSM_CS))
     {
@@ -16,20 +16,20 @@ void imu_setup()
     lsm.setGyroDataRate(LSM6DS_RATE_12_5_HZ);
 }
 
-void imu_get_data(float *data)
+void imuGetData()
 {
-    imu_setup();
+    imuSetup();
 
     sensors_event_t accel;
     sensors_event_t gyro;
     sensors_event_t temp;
     lsm.getEvent(&accel, &gyro, &temp);
 
-    data[0] = temp.temperature;
-    data[1] = accel.acceleration.x;
-    data[2] = accel.acceleration.y;
-    data[3] = accel.acceleration.z;
-    data[4] = gyro.gyro.x;
-    data[5] = gyro.gyro.y;
-    data[6] = gyro.gyro.z;
+    imuData.temperature = temp.temperature;
+    imuData.accelX = accel.acceleration.x;
+    imuData.accelY = accel.acceleration.y;
+    imuData.accelZ = accel.acceleration.z;
+    imuData.gyroX = gyro.gyro.x;
+    imuData.gyroY = gyro.gyro.y;
+    imuData.gyroZ = gyro.gyro.z;
 }

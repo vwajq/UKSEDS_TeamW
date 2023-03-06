@@ -1,8 +1,10 @@
 #include "baro.h"
 
+bmpDataStruct bmpData;
+
 Adafruit_BMP3XX bmp;
 
-void bmp_setup()
+void bmpSetup()
 {
     if (!bmp.begin_SPI(BMP_CS))
     {
@@ -16,16 +18,16 @@ void bmp_setup()
 }
 
 
-void bmp_get_data(float *data)
+void bmpGetData()
 {
-    bmp_setup();
+    bmpSetup();
 
     if (!bmp.performReading())
     {
         throw "BMP390 failed to perform reading";
     }
 
-    data[0] = bmp.temperature;
-    data[1] = bmp.pressure;
-    data[2] = bmp.readAltitude(SEALEVELPRESSURE_HPA);
+    bmpData.temperature = bmp.temperature;
+    bmpData.pressure = bmp.pressure;
+    bmpData.altitude = bmp.readAltitude(SEALEVELPRESSURE_HPA);
 }

@@ -34,14 +34,15 @@ void loop() {
   iterations++;
 
   my_file = fatfs.open("baro_data.txt", FILE_WRITE);
-  float bmp_data[3];
-  bmp_get_data(bmp_data);
+  bmpGetData();
 
   // if the file opened okay, write to it:
   if (my_file) {
     if (iterations == 1) my_file.printf("Temperature, Pressure, Altitude");
-    else my_file.printf("%f, %f, %f\n", bmp_data[0], bmp_data[1], bmp_data[2]);   
-  } else {
+    else my_file.printf("%f, %f, %f\n", bmpData.temperature, bmpData.pressure, bmpData.altitude);   
+  } 
+  else 
+  {
     throw "Error opening baro_data.txt";
   }
 

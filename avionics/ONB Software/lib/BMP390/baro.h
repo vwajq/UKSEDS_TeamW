@@ -13,10 +13,18 @@
 
 #define SEALEVELPRESSURE_HPA (1013.25)
 
+struct bmpDataStruct {
+    double temperature;
+    double pressure;
+    double altitude;
+};
+
+extern bmpDataStruct bmpData;
+
 extern Adafruit_BMP3XX bmp;
 
-void bmp_setup();
+void bmpSetup();
 
-void bmp_get_data(float *data);
+void bmpGetData();
 
 #endif 
