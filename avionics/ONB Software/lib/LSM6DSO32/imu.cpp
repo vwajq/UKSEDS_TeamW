@@ -6,7 +6,11 @@ void imuSetup()
 {
     if (!lsm.begin_SPI(LSM_CS))
     {
-        throw "Could not detect LSM6DSO32";
+        if (Serial)
+        {
+            Serial.println("Failed to connect to IMU");
+        }
+        while (true);
     }
 
     lsm.setAccelRange(LSM6DS_ACCEL_RANGE_2_G);

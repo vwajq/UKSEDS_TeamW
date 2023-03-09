@@ -9,10 +9,14 @@ RFM95 rfm = new Module(NSS, DIO0, RESET, DIO1);
 
 void rfmTransmitterSetup()
 {
-    int rfmState = rfm.begin(868.0);
+    int rfmState = rfm.begin(868.0); // Can edit configuration
     if (rfmState != RADIOLIB_ERR_NONE)
     {
-        throw "Failed to initialise RFM95W Transmitter";
+        if (Serial)
+        {
+            Serial.println("Failed to initialise RFM95W Transmitter");
+        }
+        while (true);
     }
 
     rfm.setDio0Action(setTransmittedFlag);
@@ -20,9 +24,13 @@ void rfmTransmitterSetup()
 
     if (transmissionState != RADIOLIB_ERR_NONE)
     {
-        throw "Failed to transmit";
+        if (Serial)
+        {
+            Serial.print("Failed to transmit data, code: ");
+            Serial.println(transmissionState);
+        }
+        while (true);
     }
-
     #if defined(ESP8266) || defined(ESP32)
         ICACHE_RAM_ATTR
     #endif
@@ -46,7 +54,12 @@ void rfmTransmit()
 
         if (transmissionState != RADIOLIB_ERR_NONE)
         {
-            throw "Failed to transmit";
+            if (Serial)
+            {
+                Serial.print("Failed to transmit data, code: ");
+                Serial.println(transmissionState);
+            }
+            while (true);
         }
 
         rfm.finishTransmit();
@@ -56,9 +69,4 @@ void rfmTransmit()
         transmissionState = rfm.startTransmit("Testing 1, 2, 3");
         interruptFlag = true;
     }
-}
-
-void rfmReceive()
-{
-
 }

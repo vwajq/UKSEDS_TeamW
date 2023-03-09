@@ -8,7 +8,11 @@ void bmpSetup()
 {
     if (!bmp.begin_SPI(BMP_CS))
     {
-        throw "Could not detect BMP390";
+        if (Serial)
+        {
+            Serial.println("Could not detect BMP390");
+        }
+        while (true);
     }
 
     bmp.setTemperatureOversampling(BMP3_OVERSAMPLING_8X);
@@ -24,7 +28,11 @@ void bmpGetData()
 
     if (!bmp.performReading())
     {
-        throw "BMP390 failed to perform reading";
+        if (Serial)
+        {
+            Serial.println("BMP390 failed to perform reading");
+        }
+        while (true);
     }
 
     bmpData.temperature = bmp.temperature;

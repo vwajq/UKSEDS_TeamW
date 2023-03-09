@@ -8,10 +8,14 @@ RFM95 rfm = new Module(NSS, DIO0, RESET, DIO1);
 
 void rfmReceiverSetup()
 {
-    int rfmState = rfm.begin(868.0);
+    int rfmState = rfm.begin(868.0); // Can edit configuration
     if (rfmState != RADIOLIB_ERR_NONE)
     {
-        throw "Failed to initialise RFM95W Receiver";
+        if (Serial)
+        {
+            Serial.println("Failed to initialise RFM95W Receiver");
+        }
+        while (true);
     }
 
     rfm.setDio0Action(setReceivedFlag);
@@ -19,7 +23,12 @@ void rfmReceiverSetup()
     receivedState = rfm.startReceive();
     if (receivedState != RADIOLIB_ERR_NONE)
     {
-        throw "Failed to receive";
+        if (Serial)
+        {
+            Serial.print("Failed to receive data, code: ");
+            Serial.println(receivedState);
+        }
+        while (true);
     }
 
     #if defined(ESP8266) || defined(ESP32)
@@ -49,35 +58,36 @@ void rfmReceive()
 
     if (receivedState == RADIOLIB_ERR_NONE) {
       // packet was successfully received
-      Serial.println(F("[SX1278] Received packet!"));
+      Serial.println(F("RFM95W Received packet!"));
 
       // print data of the packet
-      Serial.print(F("[SX1278] Data:\t\t"));
+      Serial.print(F("RFM95W Data:\t\t"));
       Serial.println(str);
 
       // print RSSI (Received Signal Strength Indicator)
-      Serial.print(F("[SX1278] RSSI:\t\t"));
+      Serial.print(F("RFM95W RSSI:\t\t"));
       Serial.print(rfm.getRSSI());
       Serial.println(F(" dBm"));
 
       // print SNR (Signal-to-Noise Ratio)
-      Serial.print(F("[SX1278] SNR:\t\t"));
+      Serial.print(F("RFM95W SNR:\t\t"));
       Serial.print(rfm.getSNR());
       Serial.println(F(" dB"));
 
       // print frequency error
-      Serial.print(F("[SX1278] Frequency error:\t"));
+      Serial.print(F("RFM95W Frequency error:\t"));
       Serial.print(rfm.getFrequencyError());
       Serial.println(F(" Hz"));
 
     } else if (receivedState == RADIOLIB_ERR_CRC_MISMATCH) {
       // packet was received, but is malformed
-      Serial.println(F("[SX1278] CRC error!"));
+      Serial.println(F("RFM95W CRC error!"));
 
     } else {
       // some other error occurred
-      Serial.print(F("[SX1278] Failed, code "));
+      Serial.print("Failed to receive data, code: ");
       Serial.println(receivedState);
+      while (true);
 
     receivedState = rfm.startReceive();
     interruptFlag = true;

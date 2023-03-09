@@ -7,19 +7,25 @@ gps_fix  fix; // This holds on to the latest values
 
 void gpsGetData()
 {
-    if (gps.available(gpsPort))
+    if (!gps.available(gpsPort))
     {
-        fix = gps.read();
-        
-        if (fix.valid.location) 
+        if (Serial)
         {
-            gpsData.longitude = fix.longitude();
-            gpsData.latitude = fix.latitude();
+            Serial.println("Failed to connect to GPS");
         }
+        while (true);
+    }
 
-        if (fix.valid.altitude)
-        {
-            gpsData.altitude = fix.altitude();
-        }
+    fix = gps.read();
+        
+    if (fix.valid.location) 
+    {
+        gpsData.longitude = fix.longitude();
+        gpsData.latitude = fix.latitude();
+    }
+
+    if (fix.valid.altitude)
+    {
+        gpsData.altitude = fix.altitude();
     }
 }
