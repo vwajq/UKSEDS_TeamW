@@ -24,8 +24,6 @@ void bmpSetup()
 
 void bmpGetData()
 {
-    bmpSetup();
-
     if (!bmp.performReading())
     {
         if (Serial)

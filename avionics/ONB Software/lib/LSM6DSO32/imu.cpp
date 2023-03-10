@@ -22,8 +22,6 @@ void imuSetup()
 
 void imuGetData()
 {
-    imuSetup();
-
     sensors_event_t accel;
     sensors_event_t gyro;
     sensors_event_t temp;
