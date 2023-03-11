@@ -1,36 +1,27 @@
 #include "gps.h"
 
 gpsDataStruct gpsData;
+TinyGPSPlus gps;
 
-NMEAGPS  gps; // This parses the GPS characters
-gps_fix  fix; // This holds on to the latest values
+SoftwareSerial softSerial(rxPin, txPin);
 
 void gpsSetup()
 {
-    gpsPort.begin(9600);
+    softSerial.begin(gpsBaud);
 }
 
 void gpsGetData()
 {
-    if (!gps.available(gpsPort))
+    if (gps.location.isValid())
     {
-        if (Serial)
-        {
-            Serial.println("Failed to connect to GPS");
-        }
-        while (true);
+        gpsData.longitude = gps.location.lng();
+        gpsData.latitude = gps.location.lat();
+        gpsData.altitude = gps.altitude.meters();
     }
-
-    fix = gps.read();
-        
-    if (fix.valid.location) 
+    else
     {
-        gpsData.longitude = fix.longitude();
-        gpsData.latitude = fix.latitude();
-    }
-
-    if (fix.valid.altitude)
-    {
-        gpsData.altitude = fix.altitude();
+        gpsData.longitude = -1;
+        gpsData.latitude = -1;
+        gpsData.altitude = -1;
     }
 }

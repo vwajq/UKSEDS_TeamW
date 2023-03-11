@@ -1,8 +1,12 @@
 #ifndef GPS
 #define GPS
 
-#include <NMEAGPS.h>
-#include <GPSport.h>
+#include <TinyGPSPlus.h>
+#include <SoftwareSerial.h>
+
+#define rxPin 44
+#define txPin 43
+#define gpsBaud 9600
 
 struct gpsDataStruct {
     double longitude;
@@ -11,9 +15,8 @@ struct gpsDataStruct {
 };
 
 extern gpsDataStruct gpsData;
+extern TinyGPSPlus gps;
 
-extern NMEAGPS  gps; // This parses the GPS characters
-extern gps_fix  fix; // This holds on to the latest values
 
 void gpsSetup();
 
