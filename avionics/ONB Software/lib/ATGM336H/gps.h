@@ -6,12 +6,16 @@
 
 #define rxPin 44
 #define txPin 43
-#define gpsBaud 9600
+#define gpsBaud 115200
 
 struct gpsDataStruct {
+    double satellites;
     double longitude;
     double latitude;
     double altitude;
+    double hour;
+    double minute;
+    double second;
 };
 
 extern gpsDataStruct gpsData;
