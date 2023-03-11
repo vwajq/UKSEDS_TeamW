@@ -16,12 +16,14 @@ void gpsGetData()
     {
         gpsData.longitude = gps.location.lng();
         gpsData.latitude = gps.location.lat();
-        gpsData.altitude = gps.altitude.meters();
+        
     }
     else
     {
         gpsData.longitude = -1;
         gpsData.latitude = -1;
-        gpsData.altitude = -1;
     }
+
+    if (gps.altitude.isValid()) gpsData.altitude = gps.altitude.meters();
+    else gpsData.altitude = -1;
 }
