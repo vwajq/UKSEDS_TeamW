@@ -6,8 +6,8 @@
 #include <Adafruit_Sensor.h>
 #include "Adafruit_BMP3XX.h"
 
-#define BMP_SCK 13
-#define BMP_MISO 12
+#define BMP_SCK 12
+#define BMP_MISO 13
 #define BMP_MOSI 11
 #define BMP_CS 10
 

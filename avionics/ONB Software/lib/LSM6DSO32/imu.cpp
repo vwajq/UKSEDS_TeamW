@@ -1,6 +1,7 @@
 #include "imu.h"
 
 Adafruit_LSM6DSOX lsm; 
+imuDataStruct imuData;
 
 void imuSetup()
 {

@@ -32,7 +32,6 @@ void setup() {
       delay(1);
     }
   }
-  
   bmpSetup();
   imuSetup();
 }
@@ -48,7 +47,6 @@ void loop() {
 
   bmpGetData();
   imuGetData();
-  gpsGetData();
 
   // if the file opened okay, write to it:
   if (baroFile) 
