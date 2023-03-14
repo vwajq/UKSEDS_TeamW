@@ -1,29 +1,25 @@
 #ifndef GPS
 #define GPS
 
-#include <TinyGPSPlus.h>
-#include <SoftwareSerial.h>
+#include <NMEAGPS.h>
+#include <GPSport.h>
 
-#define rxPin 44
-#define txPin 43
-#define gpsBaud 115200
+extern NMEAGPS gps;
+extern gps_fix fix;
 
 struct gpsDataStruct {
-    double satellites;
-    double longitude;
-    double latitude;
-    double altitude;
-    double hour;
-    double minute;
-    double second;
+    uint8_t satellites;
+    int32_t longitude;
+    int32_t latitude;
 };
 
 extern gpsDataStruct gpsData;
-extern TinyGPSPlus gps;
 
 
 void gpsSetup();
 
 void gpsGetData();
+
+void doSomeWork(const gps_fix & fix);
 
 #endif

@@ -1,43 +1,40 @@
 #include "gps.h"
 
-gpsDataStruct gpsData;
-TinyGPSPlus gps;
+NMEAGPS gps;
+gps_fix fix;
 
-SoftwareSerial softSerial(rxPin, txPin);
+gpsDataStruct gpsData;
 
 void gpsSetup()
 {
-    softSerial.begin(gpsBaud);
+    gpsPort.begin(9600, SERIAL_8N1, 18, 17);
 }
 
 void gpsGetData()
 {
-    gpsData.satellites = gps.satellites.value();
-
-    if (gps.location.isValid())
+    if (gps.available(gpsPort))
     {
-        gpsData.longitude = gps.location.lng();
-        gpsData.latitude = gps.location.lat();
-        gpsData.altitude = gps.altitude.meters();
-        
+        doSomeWork(gps.read());   
+    }
+}
+
+void doSomeWork(const gps_fix & fix)
+{
+    if (fix.valid.location)
+    {
+        gpsData.longitude = fix.longitudeL();
+        gpsData.latitude = fix.latitudeL();
+        if (fix.valid.satellites)
+        {
+            gpsData.satellites = fix.satellites;
+        }
     }
     else
     {
         gpsData.longitude = -1;
         gpsData.latitude = -1;
-        gpsData.altitude = -1;
-    }
-
-    if (gps.time.isValid())
-    {
-        gpsData.hour = gps.time.hour();
-        gpsData.minute = gps.time.minute();
-        gpsData.second = gps.time.second();
-    }
-    else
-    {
-        gpsData.hour = 0;
-        gpsData.minute = 0;
-        gpsData.second = 0;
+        gpsData.satellites = -1;
     }
 }
+
+
