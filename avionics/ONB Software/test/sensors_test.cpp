@@ -1,19 +1,21 @@
 #include <Arduino.h>
+#include <inttypes.h>
+
 #include "baro.h"
 #include "imu.h"
 #include "gps.h"
 
 void setup() { 
-    Serial.begin(115200);
+    Serial.begin(9600);
     while (!Serial);
 
     bmpSetup();
     imuSetup();
+    gpsSetup();
 }
 
 void loop() {
     bmpGetData();
-
     Serial.println("Barometer Data");
     Serial.printf("Temperature: %f\n", bmpData.temperature);
     Serial.printf("Pressure: %f\n", bmpData.pressure);
@@ -27,11 +29,10 @@ void loop() {
 
     gpsGetData();
     Serial.println("GPS Data");
-    Serial.printf("Longitude: %f\n", gpsData.longitude);
-    Serial.printf("Latitude: %f\n", gpsData.latitude);
-    Serial.printf("Altitude: %f\n\n", gpsData.altitude);
+    Serial.printf("Longitude: %" PRId32 "\n", gpsData.longitude);
+    Serial.printf("Latitude: %" PRId32 "\n", gpsData.latitude);
+    Serial.printf("Satellites Detected: %" PRIu8 "\n\n", gpsData.satellites);
 
     Serial.println("");
-
-    delay(1000);
+    Serial.flush();
 }
