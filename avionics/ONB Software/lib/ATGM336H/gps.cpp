@@ -14,11 +14,11 @@ void gpsGetData()
 {
     if (gps.available(gpsPort))
     {
-        doSomeWork(gps.read());   
+        gpsFindFix(gps.read());   
     }
 }
 
-void doSomeWork(const gps_fix & fix)
+void gpsFindFix(const gps_fix &fix)
 {
     if (fix.valid.location)
     {

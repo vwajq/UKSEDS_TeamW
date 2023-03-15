@@ -20,6 +20,6 @@ void gpsSetup();
 
 void gpsGetData();
 
-void doSomeWork(const gps_fix & fix);
+void gpsFindFix(const gps_fix &fix);
 
 #endif
