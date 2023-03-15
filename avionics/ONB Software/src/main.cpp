@@ -6,7 +6,7 @@
 #include <SPI.h>
 #include "SdFat.h"
 #include "Adafruit_SPIFlash.h"
-#include "flash_config.h"
+#include "flash_config.h" // Needs to be added manually to the 'src' file in the SPI Flash library
 
 Adafruit_SPIFlash flash(&flashTransport);
 
@@ -34,6 +34,7 @@ void setup() {
   }
   bmpSetup();
   imuSetup();
+  gpsSetup();
 }
 
 void loop() {
@@ -47,6 +48,7 @@ void loop() {
 
   bmpGetData();
   imuGetData();
+  gpsGetData();
 
   // if the file opened okay, write to it:
   if (baroFile) 
@@ -79,8 +81,8 @@ void loop() {
 
   if (gpsFile)
   {
-    if (iterations == 1) gpsFile.println("Longitude, Latitude, Altitude");
-    else gpsFile.printf("%f, %f, %f\n", gpsData.longitude, gpsData.latitude, gpsData.altitude);
+    if (iterations == 1) gpsFile.println("Longitude, Latitude, Satellites");
+    else gpsFile.printf("%f, %f, %f\n", gpsData.longitude, gpsData.latitude, gpsData.satellites);
   }
   else 
   {
