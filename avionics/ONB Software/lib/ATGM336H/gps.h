@@ -4,6 +4,9 @@
 #include <NMEAGPS.h>
 #include <GPSport.h>
 
+#define GPS_RX 18
+#define GPS_TX 17
+
 extern NMEAGPS gps;
 extern gps_fix fix;
 

@@ -6,7 +6,7 @@
 #include <SPI.h>
 #include "SdFat.h"
 #include "Adafruit_SPIFlash.h"
-#include "flash_config.h" // Needs to be added manually to the 'src' file in the SPI Flash library
+#include "flash_config.h"
 
 Adafruit_SPIFlash flash(&flashTransport);
 

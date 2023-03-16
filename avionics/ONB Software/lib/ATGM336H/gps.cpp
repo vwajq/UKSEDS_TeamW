@@ -7,7 +7,7 @@ gpsDataStruct gpsData;
 
 void gpsSetup()
 {
-    gpsPort.begin(9600, SERIAL_8N1, 18, 17);
+    gpsPort.begin(9600, SERIAL_8N1, GPS_RX, GPS_TX);
 }
 
 void gpsGetData()
