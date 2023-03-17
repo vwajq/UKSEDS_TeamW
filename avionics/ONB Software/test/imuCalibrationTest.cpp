@@ -1,4 +1,4 @@
-// The purpose of this test is to determine the appropriate calibration settings for the IMU to be stored on the BPI Leaf S3's FLASH
+// The purpose of this test is to determine the appropriate calibration settings for the IMU
 
 #include "imu.h"
 
