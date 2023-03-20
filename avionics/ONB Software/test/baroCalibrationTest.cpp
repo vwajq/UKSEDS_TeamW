@@ -12,7 +12,7 @@ void loop()
 {
     bmpGetData();
     // Serial.println("Barometer Data");
-    // Serial.printf("Temperature: %f\n", bmpData.temperature);
-    Serial.printf("Pressure: %f\n", bmpData.pressure);
-    // Serial.printf("Altitude: %f\n\n", bmpData.altitude);
+    // Serial.println(bmpData.temperature);
+    // Serial.println(bmpData.pressure);
+    Serial.println(bmpData.altitude);
 }
