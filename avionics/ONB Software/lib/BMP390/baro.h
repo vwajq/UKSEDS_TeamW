@@ -11,6 +11,7 @@
 #define BMP_MOSI 11
 #define BMP_CS 10
 
+// This value will change form day to day
 #define SEALEVELPRESSURE_HPA (1013.25)
 
 struct bmpDataStruct {
