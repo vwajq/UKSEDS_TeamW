@@ -31,9 +31,9 @@ void gpsFindFix(const gps_fix &fix)
     }
     else
     {
-        gpsData.longitude = -1;
-        gpsData.latitude = -1;
-        gpsData.satellites = -1;
+        gpsData.longitude = 0;
+        gpsData.latitude = 0;
+        gpsData.satellites = 0;
     }
 }
 
