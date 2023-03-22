@@ -16,6 +16,8 @@ int ySum = 0;
 int xSqSum = 0;
 int xySum = 0;
 
+char temp;
+
 // The axis to calibrate (x: 0, y: 1, z: 2)
 int axis = 0;
 
