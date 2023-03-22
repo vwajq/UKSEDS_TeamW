@@ -40,11 +40,17 @@ void setup()
         numPoints++;
 
         accelOffsetX = 9.81 - imuData.accelX;
+        // accelOffsetY = 9.81 - imuData.accelY;
+        // accelOffsetZ = 9.81 - imuData.accelZ;
 
         xSum += 9.81;
         ySum += accelOffsetX;
+        // ySum += accelOffsetY;
+        // ySum += accelOffsetZ;
         xSqSum += 9.81;
         xySum += 9.81 * accelOffsetX;
+        // xySum += 9.81 * accelOffsetY;
+        // xySum += 9.81 * accelOffsetZ;
 
         if (numPoints % 100 == 0)
         {
@@ -62,11 +68,17 @@ void setup()
         numPoints++;
 
         accelOffsetX = -9.81 + imuData.accelX;
+        // accelOffsetY = -9.81 + imuData.accelY;
+        // accelOffsetZ = -9.81 + imuData.accelZ;
 
         xSum += -9.81;
         ySum += accelOffsetX;
+        // ySum += accelOffsetY;
+        // ySum += accelOffsetZ;
         xSqSum += (-9.81) * (-9.81);
         xySum += -9.81 * accelOffsetX;
+        // xySum += -9.81 * accelOffsetY;
+        // xySum += -9.81 * accelOffsetZ;
 
         if (numPoints % 100 == 0)
         {
@@ -85,10 +97,17 @@ void setup()
         numPoints++;
 
         accelOffsetX = imuData.accelX;
+        // accelOffsetY = imuData.accelY;
+        // accelOffsetZ = imuData.accelZ;
+
         xSum += 0;
         ySum += accelOffsetX;
+        // ySum += accelOffsetY;
+        // ySum += accelOffsetZ;
         xSqSum += 0 * 0;
         xySum += 0 * accelOffsetX;
+        // xySum += 0 * accelOffsetY;
+        // xySum += 0 * accelOffsetZ;
 
         if (numPoints % 100 == 0)
         {
