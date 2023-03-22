@@ -3,6 +3,10 @@
 Adafruit_LSM6DSOX lsm; 
 imuDataStruct imuData;
 
+float gyrOffsetX = 0.004169;
+float gyrOffsetY = 0.003486;
+float gyrOffsetZ = -0.013477;
+
 void imuSetup()
 {
     if (!lsm.begin_SPI(LSM_CS))
@@ -32,7 +36,7 @@ void imuGetData()
     imuData.accelX = accel.acceleration.x;
     imuData.accelY = accel.acceleration.y;
     imuData.accelZ = accel.acceleration.z;
-    imuData.gyroX = gyro.gyro.x;
-    imuData.gyroY = gyro.gyro.y;
-    imuData.gyroZ = gyro.gyro.z;
+    imuData.gyroX = gyro.gyro.x - gyrOffsetX;
+    imuData.gyroY = gyro.gyro.y - gyrOffsetY;
+    imuData.gyroZ = gyro.gyro.z - gyrOffsetZ;
 }
