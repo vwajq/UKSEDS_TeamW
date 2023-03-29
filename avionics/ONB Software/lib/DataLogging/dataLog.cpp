@@ -16,15 +16,21 @@ void flashSetup()
         {
             Serial.println("Error: filesystem doesn't exist. Please try SdFat_format example to make one.");
         }
-        while(1)
-        {
-            yield();
-            delay(1);
-        }
+        while(true);
     }
+}
+
+void sdSetup()
+{
+
 }
 
 void flashLogData()
 {
 
+}
+
+void sdLogData()
+{
+    
 }
