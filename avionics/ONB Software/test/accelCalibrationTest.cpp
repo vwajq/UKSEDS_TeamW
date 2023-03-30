@@ -11,15 +11,12 @@ float accelOffsetY = 0;
 float accelOffsetZ = 0;
 int numPoints = 0;
 
-int xSum = 0;
-int ySum = 0;
-int xSqSum = 0;
-int xySum = 0;
+float xSum = 0;
+float ySum = 0;
+float xSqSum = 0;
+float xySum = 0;
 
-char temp;
-
-// The axis to calibrate (x: 0, y: 1, z: 2)
-int axis = 0;
+int flag;
 
 void setup()
 {
@@ -32,6 +29,15 @@ void setup()
     delay(1000*settlingTime);
     Serial.println("Done Settling!");
 
+    Serial.println("\nOrient the axis upwards against gravity - Click 1 When Ready");
+
+    do 
+    {
+        flag = Serial.parseInt();
+    }while (flag != 1);
+    flag = 0;
+    
+
     Serial.println("Beginning to calibrate acceleration in x-axis");
     endTime = millis() + calibrationTime*1000;
     while (millis() < endTime)
@@ -39,18 +45,21 @@ void setup()
         imuGetData();
         numPoints++;
 
-        accelOffsetX = 9.81 - imuData.accelX;
+        // accelOffsetX = 9.81 - imuData.accelX;
         // accelOffsetY = 9.81 - imuData.accelY;
-        // accelOffsetZ = 9.81 - imuData.accelZ;
+        accelOffsetZ = 9.81 - imuData.accelZ;
 
         xSum += 9.81;
-        ySum += accelOffsetX;
+
+        // ySum += accelOffsetX;
         // ySum += accelOffsetY;
-        // ySum += accelOffsetZ;
+        ySum += accelOffsetZ;
+
         xSqSum += 9.81;
-        xySum += 9.81 * accelOffsetX;
+        
+        // xySum += 9.81 * accelOffsetX;
         // xySum += 9.81 * accelOffsetY;
-        // xySum += 9.81 * accelOffsetZ;
+        xySum += 9.81 * accelOffsetZ;
 
         if (numPoints % 100 == 0)
         {
@@ -58,8 +67,14 @@ void setup()
         }
     }
 
-    Serial.println("\nOrient the axis downwards against gravity - Click Any Key When Ready");
-    temp = getchar();
+    Serial.println("\nOrient the axis downwards against gravity - Click 1 When Ready");
+
+    do 
+    {
+        flag = Serial.parseInt();
+    }while (flag != 1);
+    flag = 0;
+
     Serial.println("Beginning to calibrate acceleration pt. 2");
     endTime = millis() + calibrationTime*1000;
     while (millis() < endTime)
@@ -67,18 +82,21 @@ void setup()
         imuGetData();
         numPoints++;
 
-        accelOffsetX = -9.81 + imuData.accelX;
-        // accelOffsetY = -9.81 + imuData.accelY;
-        // accelOffsetZ = -9.81 + imuData.accelZ;
+        // accelOffsetX = -9.81 - imuData.accelX;
+        // accelOffsetY = -9.81 - imuData.accelY;
+        accelOffsetZ = -9.81 - imuData.accelZ;
 
         xSum += -9.81;
-        ySum += accelOffsetX;
+
+        // ySum += accelOffsetX;
         // ySum += accelOffsetY;
-        // ySum += accelOffsetZ;
+        ySum += accelOffsetZ;
+
         xSqSum += (-9.81) * (-9.81);
-        xySum += -9.81 * accelOffsetX;
+
+        // xySum += -9.81 * accelOffsetX;
         // xySum += -9.81 * accelOffsetY;
-        // xySum += -9.81 * accelOffsetZ;
+        xySum += -9.81 * accelOffsetZ;
 
         if (numPoints % 100 == 0)
         {
@@ -87,8 +105,14 @@ void setup()
     }
 
 
-    Serial.println("Orient the axis perpendicular against gravity - Click Any Key When Ready");
-    temp = getchar();
+    Serial.println("\nOrient the axis perpendicular against gravity - Click 1 When Ready");
+
+    do 
+    {
+        flag = Serial.parseInt();
+    }while (flag != 1);
+    flag = 0;
+    
     Serial.println("Beginning to calibrate acceleration (0 m/s^2) pt. 3");
     endTime = millis() + calibrationTime*1000; 
     while (millis() < endTime)
@@ -96,18 +120,21 @@ void setup()
         imuGetData();
         numPoints++;
 
-        accelOffsetX = imuData.accelX;
+        // accelOffsetX = imuData.accelX;
         // accelOffsetY = imuData.accelY;
-        // accelOffsetZ = imuData.accelZ;
+        accelOffsetZ = imuData.accelZ;
 
         xSum += 0;
-        ySum += accelOffsetX;
+
+        // ySum += accelOffsetX;
         // ySum += accelOffsetY;
-        // ySum += accelOffsetZ;
+        ySum += accelOffsetZ;
+
         xSqSum += 0 * 0;
-        xySum += 0 * accelOffsetX;
+
+        // xySum += 0 * accelOffsetX;
         // xySum += 0 * accelOffsetY;
-        // xySum += 0 * accelOffsetZ;
+        xySum += 0 * accelOffsetZ;
 
         if (numPoints % 100 == 0)
         {
