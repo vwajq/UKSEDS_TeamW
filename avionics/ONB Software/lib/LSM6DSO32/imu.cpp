@@ -7,6 +7,14 @@ float gyrOffsetX = 0.004169;
 float gyrOffsetY = 0.003486;
 float gyrOffsetZ = -0.013477;
 
+float accOffsetX;
+float accOffsetY;
+float accOffsetZ;
+
+float accelX;
+float accelY;
+float accelZ;
+
 void imuSetup()
 {
     if (!lsm.begin_SPI(LSM_CS, LSM_SCK, LSM_MISO, LSM_MOSI))
@@ -33,9 +41,21 @@ void imuGetData()
     lsm.getEvent(&accel, &gyro, &temp);
 
     imuData.temperature = temp.temperature;
-    imuData.accelX = accel.acceleration.x;
-    imuData.accelY = accel.acceleration.y;
-    imuData.accelZ = accel.acceleration.z;
+
+    // Some of the offset values were tweaked via trial & error from the calibration results in order to improve accuracy
+    // This tweaking is needed due to the limited capability of the simple calibration test employed
+    accelX = accel.acceleration.x;
+    accOffsetX = -0.990351*accelX + (0.213184);
+    imuData.accelX = accelX - accOffsetX;
+
+    accelY = accel.acceleration.y;
+    accOffsetY = -0.986842*accelY + (-0.359139);
+    imuData.accelY = accelY - accOffsetY;
+
+    accelZ = accel.acceleration.z;
+    accOffsetZ = -0.975009*accelZ + (-0.045458);
+    imuData.accelZ = accelZ - accOffsetZ;
+
     imuData.gyroX = gyro.gyro.x - gyrOffsetX;
     imuData.gyroY = gyro.gyro.y - gyrOffsetY;
     imuData.gyroZ = gyro.gyro.z - gyrOffsetZ;
