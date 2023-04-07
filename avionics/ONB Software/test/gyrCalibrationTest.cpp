@@ -45,11 +45,10 @@ void setup()
 
 void loop()
 {
-    // Prints out the IMU values (Acceleration in m/s^2, Angular Rate in rad/s)
+    // Prints out the IMU values (Angular Rate in rad/s)
 
-    // imuGetData();
-    // Serial.println("IMU Data");
-    // // Serial.printf("Acceleration (x, y, z): %f %f %f\n", imuData.accelX, imuData.accelY, imuData.accelZ);
-    // Serial.printf("Angle (x, y, z): %f %f %f\n\n", imuData.gyroX - 0.004169, imuData.gyroY - 0.003486, imuData.gyroZ + 0.013477);
-    // delay(1000);
+    imuGetData();
+    Serial.println("IMU Data");
+    Serial.printf("Angle (x, y, z): %f %f %f\n\n", imuData.gyroX - 0.004169, imuData.gyroY - 0.003486, imuData.gyroZ + 0.013477);
+    delay(1000);
 }
