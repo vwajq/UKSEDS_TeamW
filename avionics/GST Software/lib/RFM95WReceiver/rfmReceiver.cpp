@@ -8,7 +8,8 @@ RFM95 rfm = new Module(NSS, DIO0, RESET, DIO1);
 
 void rfmReceiverSetup()
 {
-    int rfmState = rfm.begin(868.0); // Can edit configuration
+    // int rfmState = rfm.begin(868.0, 125.0, 12, 6, RADIOLIB_SX127X_SYNC_WORD, 13, 12, 0); 
+    int rfmState = rfm.begin(868.0);
     if (rfmState != RADIOLIB_ERR_NONE)
     {
         if (Serial)
@@ -91,6 +92,6 @@ void rfmReceive()
 
     receivedState = rfm.startReceive();
     interruptFlag = true;
-
+    }
 }
 
