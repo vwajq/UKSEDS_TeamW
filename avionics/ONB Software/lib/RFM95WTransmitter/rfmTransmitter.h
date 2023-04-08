@@ -4,10 +4,10 @@
 #include <Arduino.h>
 #include <RadioLib.h>
 
-#define NSS 10
-#define DIO0 41
-#define DIO1 42
-#define RESET 9
+#define NSS 4
+#define DIO0 5
+#define DIO1 6
+#define RESET 7
 
 extern int transmissionState;
 extern volatile bool transmittedFlag;
