@@ -17,7 +17,7 @@ float accelZ;
 
 void imuSetup()
 {
-    if (!lsm.begin_SPI(LSM_CS))
+    if (!lsm.begin_SPI(LSM_CS, LSM_SCK, LSM_MISO, LSM_MOSI))
     {
         if (Serial)
         {

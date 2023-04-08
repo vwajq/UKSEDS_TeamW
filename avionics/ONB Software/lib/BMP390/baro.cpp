@@ -6,7 +6,7 @@ Adafruit_BMP3XX bmp;
 
 void bmpSetup()
 {
-    if (!bmp.begin_SPI(BMP_CS))
+    if (!bmp.begin_SPI(BMP_CS, BMP_SCK, BMP_MISO, BMP_MOSI))
     {
         if (Serial)
         {
