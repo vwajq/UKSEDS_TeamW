@@ -9,6 +9,8 @@
 #define DIO1 6
 #define RESET 7
 
+#define BYTES_TO_TRANSMIT 32
+
 extern int transmissionState;
 extern volatile bool transmittedFlag;
 extern volatile bool interruptFlag;

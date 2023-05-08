@@ -5,6 +5,8 @@ int transmissionState = RADIOLIB_ERR_NONE;
 volatile bool transmittedFlag = false;
 volatile bool interruptFlag = true;
 
+byte byteArrTransmit[BYTES_TO_TRANSMIT];
+
 RFM95 rfm = new Module(NSS, DIO0, RESET, DIO1);
 
 void rfmTransmitterSetup()
@@ -66,6 +68,7 @@ void rfmTransmit()
         rfm.finishTransmit();
 
         transmissionState = rfm.startTransmit("Testing 1, 2, 3");
+        // transmissionState = rfm.startTransmit(byteArrTransmit, BYTES_TO_TRANSMIT);
         interruptFlag = true;
     }
 }
