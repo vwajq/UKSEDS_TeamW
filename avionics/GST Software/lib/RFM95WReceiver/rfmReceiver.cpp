@@ -4,6 +4,8 @@ int receivedState = RADIOLIB_ERR_NONE;
 volatile bool receivedFlag = false;
 volatile bool interruptFlag = true;
 
+byte byteArrReceive[BYTES_TO_RECEIVE];
+
 RFM95 rfm = new Module(NSS, DIO0, RESET, DIO1);
 
 void rfmReceiverSetup()
@@ -56,6 +58,7 @@ void rfmReceive()
 
     String str;
     receivedState = rfm.readData(str);
+    // receivedState = rfm.readData(byteArrReceive, BYTES_TO_RECEIVE);
 
     if (receivedState == RADIOLIB_ERR_NONE) {
       // packet was successfully received

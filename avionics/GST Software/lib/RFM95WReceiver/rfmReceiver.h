@@ -9,6 +9,8 @@
 #define DIO1 6
 #define RESET 7
 
+#define BYTES_TO_RECEIVE 23
+
 extern int receivedState;
 extern volatile bool receivedFlag;
 extern volatile bool interruptFlag;
