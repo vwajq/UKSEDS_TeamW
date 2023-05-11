@@ -4,9 +4,8 @@ int receivedState = RADIOLIB_ERR_NONE;
 volatile bool receivedFlag = false;
 volatile bool interruptFlag = true;
 
-byte byteArrReceive[BYTES_TO_RECEIVE];
-
 RFM95 rfm = new Module(NSS, DIO0, RESET, DIO1);
+byte byteArrReceive[BYTES_TO_RECEIVE];
 
 void rfmReceiverSetup()
 {
@@ -56,45 +55,43 @@ void rfmReceive()
         receivedFlag = false;
     }
 
-    String str;
-    receivedState = rfm.readData(str);
-    // receivedState = rfm.readData(byteArrReceive, BYTES_TO_RECEIVE);
+    receivedState = rfm.readData(byteArrReceive, BYTES_TO_RECEIVE);
 
     if (receivedState == RADIOLIB_ERR_NONE) {
-      // packet was successfully received
-      Serial.println(F("RFM95W Received packet!"));
+        // packet was successfully received
+        Serial.println(F("RFM95W Received packet!"));
 
-      // print data of the packet
-      Serial.print(F("RFM95W Data:\t\t"));
-      Serial.println(str);
+        // print data of the packet
+        Serial.print(F("[RFM96W] Data:\t\t\n"));
+        for (auto x : byteArrReceive) { Serial.print(x); Serial.print(", ");}
 
-      // print RSSI (Received Signal Strength Indicator)
-      Serial.print(F("RFM95W RSSI:\t\t"));
-      Serial.print(rfm.getRSSI());
-      Serial.println(F(" dBm"));
+        // print RSSI (Received Signal Strength Indicator)
+        Serial.print(F("RFM95W RSSI:\t\t"));
+        Serial.print(rfm.getRSSI());
+        Serial.println(F(" dBm"));
 
-      // print SNR (Signal-to-Noise Ratio)
-      Serial.print(F("RFM95W SNR:\t\t"));
-      Serial.print(rfm.getSNR());
-      Serial.println(F(" dB"));
+        // print SNR (Signal-to-Noise Ratio)
+        Serial.print(F("RFM95W SNR:\t\t"));
+        Serial.print(rfm.getSNR());
+        Serial.println(F(" dB"));
 
-      // print frequency error
-      Serial.print(F("RFM95W Frequency error:\t"));
-      Serial.print(rfm.getFrequencyError());
-      Serial.println(F(" Hz"));
+        // print frequency error
+        Serial.print(F("RFM95W Frequency error:\t"));
+        Serial.print(rfm.getFrequencyError());
+        Serial.println(F(" Hz"));
 
-    } else if (receivedState == RADIOLIB_ERR_CRC_MISMATCH) {
-      // packet was received, but is malformed
-      Serial.println(F("RFM95W CRC error!"));
+        } else if (receivedState == RADIOLIB_ERR_CRC_MISMATCH) {
+        // packet was received, but is malformed
+        Serial.println(F("RFM95W CRC error!"));
 
-    } else {
-      // some other error occurred
-      Serial.print("Failed to receive data, code: ");
-      Serial.println(receivedState);
-      while (true);
+        } else {
+        // some other error occurred
+        Serial.print("Failed to receive data, code: ");
+        Serial.println(receivedState);
+        while (true);
 
-    receivedState = rfm.startReceive();
-    interruptFlag = true;
-    }
+        receivedState = rfm.startReceive();
+        interruptFlag = true;
+        }
 }
 
