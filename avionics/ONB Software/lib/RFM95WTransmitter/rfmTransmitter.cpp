@@ -48,7 +48,7 @@ void setTransmittedFlag()
     transmittedFlag = true;
 }
 
-void rfmTransmit()
+void rfmTransmit(byte arr[])
 {
     if (transmittedFlag)
     {
@@ -66,9 +66,8 @@ void rfmTransmit()
         }
 
         rfm.finishTransmit();
-
-        transmissionState = rfm.startTransmit("Testing 1, 2, 3");
-        // transmissionState = rfm.startTransmit(byteArrTransmit, BYTES_TO_TRANSMIT);
+        
+        transmissionState = rfm.startTransmit(byteArrTransmit, BYTES_TO_TRANSMIT);
         interruptFlag = true;
     }
 }

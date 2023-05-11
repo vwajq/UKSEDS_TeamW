@@ -9,7 +9,7 @@
 #define DIO1 6
 #define RESET 7
 
-#define BYTES_TO_TRANSMIT 32
+#define BYTES_TO_TRANSMIT 32 // Subject to change once data structure is finalised
 
 extern int transmissionState;
 extern volatile bool transmittedFlag;
@@ -21,6 +21,6 @@ void rfmTransmitterSetup();
 
 void setTransmittedFlag();
 
-void rfmTransmit();
+void rfmTransmit(byte arr[]);
 
 #endif
