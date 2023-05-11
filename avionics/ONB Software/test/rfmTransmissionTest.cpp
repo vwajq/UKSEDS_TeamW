@@ -11,7 +11,10 @@ void setup()
     {
         byteArrTransmit[i] = i;
         unsigned long preTransmit = micros();
+
+        while (!transmittedFlag);
         rfmTransmit(byteArrTransmit);
+        
         unsigned long postTransmit = micros();
 
         Serial.printf("Transmission time (us): %d", postTransmit - preTransmit);
