@@ -16,6 +16,7 @@ extern volatile bool transmittedFlag;
 extern volatile bool interruptFlag;
 
 extern RFM95 rfm;
+extern byte byteArrTransmit[BYTES_TO_TRANSMIT];
 
 void rfmTransmitterSetup();
 
