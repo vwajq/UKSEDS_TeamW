@@ -154,7 +154,7 @@ void sdLogData()
         while(1);
     }
 
-    // The below is just to 
+    // The below is just to print out the data logging performance
     // rb.sync();
     // sdFile.truncate();
     // sdFile.rewind();
