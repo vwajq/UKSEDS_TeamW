@@ -10,8 +10,8 @@
 
 #define SD_CONFIG SdioConfig(FIFO_SDIO)
 
-// Interval between points for 25 ksps.
-#define LOG_INTERVAL_USEC 40
+// Logging at a rate of 1 kHz
+#define LOG_INTERVAL_USEC 1000000
 
 // NEED TO EDIT TO REFLECT ACTUAL FILE SIZE
 #define LOG_FILE_SIZE 256*100*60*40 

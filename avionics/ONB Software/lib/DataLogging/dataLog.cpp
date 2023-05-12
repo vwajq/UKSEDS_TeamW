@@ -135,44 +135,44 @@ void sdLogData()
     }
 
     // Wait until time to log data.
-    while (micros() < logTime) {
+    if (micros() >= logTime)
+    {
+        rb.printf("%X,%llu,%lf,%lf,%lf,%lf,%lf,%lf,%lf,%lf,%lf,%lf,%lf",
+            data.logCode,
+            data.timeStamp,
+            data.bmpTemperature, data.bmpPressure, data.bmpAltitude,
+            data.imuAccelX, data.imuAccelY, data.imuAccelZ,
+            data.imuGyroX, data.imuGyroY, data.imuGyroZ,
+            data.gpsLatitude, data.gpsLongitude
+        );
+        rb.println();
+
+        if (rb.getWriteError()) {
+            // Error caused by too few free bytes in RingBuf.
+            Serial.println("WriteError");
+            while(1);
+        }
+
+        // The below is just to print out the data logging performance
+        // rb.sync();
+        // sdFile.truncate();
+        // sdFile.rewind();
+        // // Print first twenty lines of file.
+        // for (uint8_t n = 0; n < 20 && sdFile.available();) {
+        //     int c = sdFile.read();
+        //     if (c < 0) {
+        //     break;
+        //     }
+        //     Serial.write(c);
+        //     if (c == '\n') n++;
+        // }
+        // Serial.print("fileSize: ");
+        // Serial.println((uint32_t)sdFile.fileSize());
+        // Serial.print("maxBytesUsed: ");
+        // Serial.println(maxUsed);
+        // Serial.print("minSpareMicros: ");
+        // Serial.println(minSpareMicros);
     }
-
-    rb.printf("%X,%llu,%lf,%lf,%lf,%lf,%lf,%lf,%lf,%lf,%lf,%lf,%lf",
-        data.logCode,
-        data.timeStamp,
-        data.bmpTemperature, data.bmpPressure, data.bmpAltitude,
-        data.imuAccelX, data.imuAccelY, data.imuAccelZ,
-        data.imuGyroX, data.imuGyroY, data.imuGyroZ,
-        data.gpsLatitude, data.gpsLongitude
-    );
-    rb.println();
-
-    if (rb.getWriteError()) {
-        // Error caused by too few free bytes in RingBuf.
-        Serial.println("WriteError");
-        while(1);
-    }
-
-    // The below is just to print out the data logging performance
-    // rb.sync();
-    // sdFile.truncate();
-    // sdFile.rewind();
-    // // Print first twenty lines of file.
-    // for (uint8_t n = 0; n < 20 && sdFile.available();) {
-    //     int c = sdFile.read();
-    //     if (c < 0) {
-    //     break;
-    //     }
-    //     Serial.write(c);
-    //     if (c == '\n') n++;
-    // }
-    // Serial.print("fileSize: ");
-    // Serial.println((uint32_t)sdFile.fileSize());
-    // Serial.print("maxBytesUsed: ");
-    // Serial.println(maxUsed);
-    // Serial.print("minSpareMicros: ");
-    // Serial.println(minSpareMicros);
 
     sdFile.close();
 }
