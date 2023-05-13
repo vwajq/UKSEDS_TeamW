@@ -6,13 +6,10 @@
 #include <Adafruit_Sensor.h>
 #include "Adafruit_BMP3XX.h"
 
-#define BMP_CS 10
+#define BMP_CS 13
 #define BMP_MISO 11
-#define BMP_SCK 12
-#define BMP_MOSI 13
-
-// This value will change form day to day
-#define SEALEVELPRESSURE_HPA (1013.25)
+#define BMP_SCK 10
+#define BMP_MOSI 12
 
 struct bmpDataStruct {
     double temperature;
@@ -26,6 +23,6 @@ extern Adafruit_BMP3XX bmp;
 
 void bmpSetup();
 
-void bmpGetData();
+void bmpGetData(double SEALEVELPRESSURE_HPA);
 
 #endif 

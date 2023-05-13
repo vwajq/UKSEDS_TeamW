@@ -22,7 +22,7 @@ void bmpSetup()
 }
 
 
-void bmpGetData()
+void bmpGetData(double SEALEVELPRESSURE_HPA)
 {
     if (!bmp.performReading())
     {

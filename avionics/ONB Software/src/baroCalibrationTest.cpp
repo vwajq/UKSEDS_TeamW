@@ -1,5 +1,7 @@
 #include "baro.h"
 
+#define SEALEVELPRESSURE_HPA (1013.25)
+
 void setup()
 {
     Serial.begin(115200);
@@ -10,7 +12,7 @@ void setup()
 
 void loop()
 {
-    bmpGetData();
+    bmpGetData(SEALEVELPRESSURE_HPA);
     // Serial.println("Barometer Data");
     // Serial.println(bmpData.temperature);
     // Serial.println(bmpData.pressure);

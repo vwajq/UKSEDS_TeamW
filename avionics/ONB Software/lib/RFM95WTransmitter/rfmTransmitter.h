@@ -3,6 +3,7 @@
 
 #include <Arduino.h>
 #include <RadioLib.h>
+#include <SPI.h>
 
 #define NSS 4
 #define DIO0 5

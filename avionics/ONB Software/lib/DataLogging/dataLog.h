@@ -16,7 +16,7 @@
 // NEED TO EDIT TO REFLECT ACTUAL FILE SIZE
 #define LOG_FILE_SIZE 256*100*60*40 
 
-// Space to hold more than 800 ms of data for 10 byte lines at 25 ksps.
+// NEED TO EDIT TO REFLECT ACTUAL NUMBER OF BYTES PER LOG (IDEALLY NEEDS TO ACCOMMODATE FOR 800 MS OF DATA)
 #define RING_BUF_CAPACITY 400*512 
 
 extern Adafruit_SPIFlash flash;

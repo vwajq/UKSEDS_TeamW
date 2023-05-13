@@ -7,10 +7,15 @@ volatile bool interruptFlag = true;
 
 byte byteArrTransmit[BYTES_TO_TRANSMIT];
 
-RFM95 rfm = new Module(NSS, DIO0, RESET, DIO1);
+SPIClass spi(HSPI);
+SPISettings spiSettings(2000000, MSBFIRST, SPI_MODE0);
+
+RFM95 rfm = new Module(NSS, DIO0, RESET, DIO1, spi, spiSettings);
 
 void rfmTransmitterSetup()
 {
+    spi.begin(42, 40, 41, 38);
+    pinMode(38, OUTPUT);
     // int rfmState = rfm.begin(868.0, 125.0, 12, 6, RADIOLIB_SX127X_SYNC_WORD, 13, 12, 0); 
     int rfmState = rfm.begin(868.0);
     if (rfmState != RADIOLIB_ERR_NONE)

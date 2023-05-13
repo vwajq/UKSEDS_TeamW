@@ -1,5 +1,14 @@
 {
     "files.associations": {
-        "*.tcc": "cpp"
-    }
+        "*.tcc": "cpp",
+        "array": "cpp",
+        "deque": "cpp",
+        "string": "cpp",
+        "unordered_map": "cpp",
+        "unordered_set": "cpp",
+        "vector": "cpp",
+        "string_view": "cpp",
+        "initializer_list": "cpp"
+    },
+    "cmake.sourceDirectory": "D:/UKSEDS Team W/avionics/ONB Software/.pio/libdeps/bpi_leaf_s3/Adafruit BusIO"
 }
