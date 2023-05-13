@@ -5,7 +5,6 @@ volatile bool receivedFlag = false;
 volatile bool interruptFlag = true;
 
 RFM95 rfm = new Module(NSS, DIO0, RESET, DIO1);
-byte byteArrReceive[BYTES_TO_RECEIVE];
 
 void rfmReceiverSetup()
 {
@@ -20,7 +19,7 @@ void rfmReceiverSetup()
         while (true);
     }
 
-    rfm.setDio0Action(setReceivedFlag);
+    rfm.setDio0Action(setReceivedFlag, RISING);
 
     receivedState = rfm.startReceive();
     if (receivedState != RADIOLIB_ERR_NONE)
@@ -54,6 +53,7 @@ void rfmReceive()
         interruptFlag = false;
         receivedFlag = false;
     }
+
 
     receivedState = rfm.readData(byteArrReceive, BYTES_TO_RECEIVE);
 

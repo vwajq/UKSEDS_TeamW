@@ -27,7 +27,7 @@ void rfmTransmitterSetup()
         while (true);
     }
 
-    rfm.setDio0Action(setTransmittedFlag);
+    rfm.setDio0Action(setTransmittedFlag, RISING);
     transmissionState = rfm.startTransmit("Beginning Transmission...");
 
     if (transmissionState != RADIOLIB_ERR_NONE)
